@@ -9,7 +9,7 @@
   <Identity
     Name="dcffef85-f023-445d-9ed6-0bd8fca8d705"
     Publisher="CN=neilturner"
-    Version="1.0.0.0" />
+    Version="1.1.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="dcffef85-f023-445d-9ed6-0bd8fca8d705" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
