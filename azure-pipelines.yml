@@ -12,11 +12,11 @@ pr:
 - rel/*
 
 pool:
-  vmImage: 'vs2017-win2016'
+  vmImage: 'latest'
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'x86|x64|ARM'
+  buildPlatform: 'x64'
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
