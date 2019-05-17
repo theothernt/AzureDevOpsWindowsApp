@@ -12,7 +12,7 @@ pr:
 - rel/*
 
 pool:
-  vmImage: 'VS2017-Win2016'
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
@@ -34,6 +34,14 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
     maximumCpuCount: true
+
+- task: AzureFileCopy@3
+  inputs:
+    SourcePath: '$(appxPackageDir)'
+    azureSubscription: 'Visual Studio Ultimate with MSDN(cef96644-1fd3-4e4c-a40d-995d6b91fa72)'
+    Destination: 'AzureBlob'
+    storage: 'builtoutputtest1'
+    ContainerName: 'Test Builds'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
