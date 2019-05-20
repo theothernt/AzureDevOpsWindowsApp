@@ -26,29 +26,30 @@ steps:
 - task: NuGetToolInstaller@0
   
 - task: NuGetCommand@2
+  displayName: NuGet restore for UWP
   inputs:
     restoreSolution: '$(solutionUWP)'
 
 - task: NuGetCommand@2
+  displayName: NuGet restore for WPF
   inputs:
     restoreSolution: '$(solutionWPF)'
 
 - task: VSBuild@1
+  displayName: Build for WPF
+  inputs:
+    solution: '$(solutionWPF)'
+    configuration: $(BuildConfiguration)
+    #msbuildArguments: /restore 
+    #msbuildArguments: /restore /p:AppInstallerUri=$(DistributionUrl) /p:UapAppxPackageBuildMode=$(MsixBuildMode) /p:GenerateAppInstallerFile=$(MsixGenerateAppInstaller)
+
+- task: VSBuild@1
+  displayName: Build for UWP
   inputs:
     platform: 'x86'
     solution: '$(solutionUWP)'
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=SideloadOnly'
-
-- task: VSBuild@1
-  displayName: Build for $(BuildConfiguration)
-  inputs:
-    platform: x86
-    solution: '$(solutionWPF)'
-    configuration: $(BuildConfiguration)
-    #msbuildArguments: /restore 
-    #msbuildArguments: /restore /p:AppInstallerUri=$(DistributionUrl) /p:UapAppxPackageBuildMode=$(MsixBuildMode) /p:GenerateAppInstallerFile=$(MsixGenerateAppInstaller)
-    
 
 - task: ArchiveFiles@1
   displayName: Zip release folder
