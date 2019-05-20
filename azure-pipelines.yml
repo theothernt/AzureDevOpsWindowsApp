@@ -7,9 +7,9 @@ trigger:
 - master
 - rel/*
 
-pr:
-- master
-- rel/*
+#pr:
+#- master
+#- rel/*
 
 pool:
   vmImage: 'windows-latest'
