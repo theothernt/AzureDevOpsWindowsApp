@@ -48,4 +48,4 @@ steps:
   displayName: 'Publish Artifact: UWP'
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)\UWP'
-    artifactName: Release
+    artifactName: UWP
