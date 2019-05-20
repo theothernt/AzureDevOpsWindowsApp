@@ -41,18 +41,11 @@ steps:
   inputs:
     archiveType: zip
     rootFolder: '$(build.artifactStagingDirectory)\AppxPackages\\'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\Release\App.$(Build.BuildNumber).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\ReleaseUWP\App.$(Build.BuildNumber).zip'
     includeRootFolder: false
-
-#- task: CopyFiles@2
-  #displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-  #inputs:
-    #SourceFolder: '$(system.defaultworkingdirectory)'
-    #Contents: '**\bin\$(BuildConfiguration)\**'
-    #TargetFolder: '$(build.artifactstagingdirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: Release'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\ReleaseUWP'
     artifactName: Release
