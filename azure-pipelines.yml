@@ -40,13 +40,15 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=SideloadOnly'
 
-#displayName: Build for $(BuildConfiguration)
-    #inputs:
-      #solution: 'AnotherApp.WPF\AnotherApp.WPF.csproj'
-      #platform: x86
-      #msbuildArguments: /restore 
-      #msbuildArguments: /restore /p:AppInstallerUri=$(DistributionUrl) /p:UapAppxPackageBuildMode=$(MsixBuildMode) /p:GenerateAppInstallerFile=$(MsixGenerateAppInstaller)
-      #configuration: $(BuildConfiguration)
+- task: VSBuild@1
+  displayName: Build for $(BuildConfiguration)
+  inputs:
+    platform: x86
+    solution: '$(solutionWPF)'
+    configuration: $(BuildConfiguration)
+    #msbuildArguments: /restore 
+    #msbuildArguments: /restore /p:AppInstallerUri=$(DistributionUrl) /p:UapAppxPackageBuildMode=$(MsixBuildMode) /p:GenerateAppInstallerFile=$(MsixGenerateAppInstaller)
+    
 
 - task: ArchiveFiles@1
   displayName: Zip release folder
