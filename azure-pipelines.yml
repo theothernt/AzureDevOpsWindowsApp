@@ -55,7 +55,7 @@ steps:
   displayName: 'Copy WPF build files'
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: 'AzureDevOpsWindowsApp\AnotherApp.WPF\bin\$(BuildConfiguration)\*'
+    Contents: 'AnotherApp.WPF\bin\$(BuildConfiguration)\*'
     TargetFolder: '$(appOutputDir)'
 
 - task: ArchiveFiles@1
