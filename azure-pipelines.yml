@@ -21,6 +21,7 @@ variables:
   solutionWPF: 'AnotherApp.WPF\AnotherApp.WPF.csproj'
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
+  appOutputDir: '$(build.artifactStagingDirectory)\App\\'
 
 steps:
 - task: NuGetToolInstaller@0
@@ -40,7 +41,6 @@ steps:
   inputs:
     solution: '$(solutionWPF)'
     configuration: $(BuildConfiguration)
-    #msbuildArguments: /restore 
     #msbuildArguments: /restore /p:AppInstallerUri=$(DistributionUrl) /p:UapAppxPackageBuildMode=$(MsixBuildMode) /p:GenerateAppInstallerFile=$(MsixGenerateAppInstaller)
 
 - task: VSBuild@1
@@ -51,11 +51,26 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=SideloadOnly'
 
+- task: CopyFiles@2
+  displayName: 'Copy WPF build files'
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: 'AzureDevOpsWindowsApp\AnotherApp.WPF\bin\$(BuildConfiguration)\*'
+    TargetFolder: '$(appOutputDir)'
+
 - task: ArchiveFiles@1
-  displayName: Zip release folder
+  displayName: Zip WPF release
   inputs:
     archiveType: zip
-    rootFolder: '$(build.artifactStagingDirectory)\AppxPackages\\'
+    rootFolder: '$(appOutputDir)'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\WPF\App.$(Build.BuildNumber).zip'
+    includeRootFolder: false
+
+- task: ArchiveFiles@1
+  displayName: Zip UWP release
+  inputs:
+    archiveType: zip
+    rootFolder: '$(appxPackageDir)'
     archiveFile: '$(Build.ArtifactStagingDirectory)\UWP\App.$(Build.BuildNumber).zip'
     includeRootFolder: false
 
