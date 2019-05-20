@@ -41,11 +41,11 @@ steps:
   inputs:
     archiveType: zip
     rootFolder: '$(build.artifactStagingDirectory)\AppxPackages\\'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\ReleaseUWP\App.$(Build.BuildNumber).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\UWP\App.$(Build.BuildNumber).zip'
     includeRootFolder: false
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: Release'
+  displayName: 'Publish Artifact: UWP'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\ReleaseUWP'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\UWP'
     artifactName: Release
