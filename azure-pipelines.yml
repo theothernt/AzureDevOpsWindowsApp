@@ -75,6 +75,12 @@ steps:
     includeRootFolder: false
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: WPF'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\WPF'
+    artifactName: WPF
+
+- task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: UWP'
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)\UWP'
