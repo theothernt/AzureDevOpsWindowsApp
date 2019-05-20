@@ -15,9 +15,10 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
   buildPlatform: 'x86|x64'
   #buildPlatform: 'x86|x64|ARM'
+  solutionUWP: 'App.UWP\App.UWP.csproj'
+  solutionWPF: 'AnotherApp.WPF\AnotherApp.WPF.csproj'
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
@@ -26,15 +27,26 @@ steps:
   
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    restoreSolution: '$(solutionUWP)'
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solutionWPF)'
 
 - task: VSBuild@1
   inputs:
     platform: 'x86'
-    solution: '$(solution)'
+    solution: '$(solutionUWP)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
-    maximumCpuCount: true
+    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=SideloadOnly'
+
+#displayName: Build for $(BuildConfiguration)
+    #inputs:
+      #solution: 'AnotherApp.WPF\AnotherApp.WPF.csproj'
+      #platform: x86
+      #msbuildArguments: /restore 
+      #msbuildArguments: /restore /p:AppInstallerUri=$(DistributionUrl) /p:UapAppxPackageBuildMode=$(MsixBuildMode) /p:GenerateAppInstallerFile=$(MsixGenerateAppInstaller)
+      #configuration: $(BuildConfiguration)
 
 - task: ArchiveFiles@1
   displayName: Zip release folder
