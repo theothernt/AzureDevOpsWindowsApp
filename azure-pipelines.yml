@@ -16,7 +16,8 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'x86|x64|ARM'
+  buildPlatform: 'x64'
+  #buildPlatform: 'x86|x64|ARM'
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
@@ -39,8 +40,8 @@ steps:
   displayName: Zip release folder
   inputs:
     archiveType: zip
-    rootFolder: $(System.DefaultWorkingDirectory)/AppxPackages
-    archiveFile: $(Build.ArtifactStagingDirectory)\Release\App.$(Build.BuildNumber).zip
+    rootFolder: '$(build.artifactStagingDirectory)\AppxPackages\\'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\Release\App.$(Build.BuildNumber).zip'
     includeRootFolder: false
 
 #- task: CopyFiles@2
