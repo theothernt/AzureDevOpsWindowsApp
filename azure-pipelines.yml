@@ -39,7 +39,7 @@ steps:
   displayName: Zip release folder
   inputs:
     archiveType: zip
-    rootFolder: $(System.DefaultWorkingDirectory)/theothernt.AzureDevOpsWindowsApp/drop/AppxPackages/
+    rootFolder: $(System.DefaultWorkingDirectory)/AppxPackages
     archiveFile: $(Build.ArtifactStagingDirectory)\Release\App.$(Build.BuildNumber).zip
     includeRootFolder: false
 
