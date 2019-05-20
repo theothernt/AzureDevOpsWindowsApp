@@ -9,12 +9,12 @@
   <Identity
     Name="dcffef85-f023-445d-9ed6-0bd8fca8d705"
     Publisher="CN=neilturner"
-    Version="1.1.1.0" />
+    Version="1.1.7.0" />
 
   <mp:PhoneIdentity PhoneProductId="dcffef85-f023-445d-9ed6-0bd8fca8d705" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>App.UWP</DisplayName>
+    <DisplayName>App</DisplayName>
     <PublisherDisplayName>neilturner</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -32,10 +32,10 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="App.UWP.App">
       <uap:VisualElements
-        DisplayName="App.UWP"
+        DisplayName="App"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="App.UWP"
+        Description="Test App"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
