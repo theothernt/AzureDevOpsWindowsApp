@@ -85,5 +85,3 @@ steps:
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)\UWP'
     artifactName: UWP
-
-# $(System.ArtifactsDirectory) in Release Pipeline
