@@ -63,7 +63,7 @@ steps:
   inputs:
     archiveType: zip
     rootFolder: '$(appOutputDir)'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\WPF\App.$(Build.BuildNumber).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\WPF\App.WPF.$(Build.BuildNumber).zip'
     includeRootFolder: false
 
 - task: ArchiveFiles@1
@@ -71,7 +71,7 @@ steps:
   inputs:
     archiveType: zip
     rootFolder: '$(appxPackageDir)'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\UWP\App.$(Build.BuildNumber).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\UWP\App.UWP.$(Build.BuildNumber).zip'
     includeRootFolder: false
 
 - task: PublishBuildArtifacts@1
