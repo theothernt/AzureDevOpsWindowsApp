@@ -54,8 +54,8 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy WPF build files'
   inputs:
-    SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: 'AnotherApp.WPF\bin\$(BuildConfiguration)\*'
+    SourceFolder: '$(system.defaultworkingdirectory)\AnotherApp.WPF\bin\$(BuildConfiguration)\'
+    Contents: '*'
     TargetFolder: '$(appOutputDir)'
 
 - task: ArchiveFiles@1
