@@ -41,7 +41,6 @@ steps:
   inputs:
     solution: '$(solutionWPF)'
     configuration: $(BuildConfiguration)
-    #msbuildArguments: /restore /p:AppInstallerUri=$(DistributionUrl) /p:UapAppxPackageBuildMode=$(MsixBuildMode) /p:GenerateAppInstallerFile=$(MsixGenerateAppInstaller)
 
 - task: VSBuild@1
   displayName: Build for UWP
