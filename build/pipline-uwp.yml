@@ -3,9 +3,9 @@
 # Add steps that test and distribute an app, save build artifacts, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
-- rel/*
+#trigger:
+#- master
+#- rel/*
 
 #pr:
 #- master
@@ -15,8 +15,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  buildPlatform: 'x86|x64'
-  #buildPlatform: 'x86|x64|ARM'
+  buildPlatform: 'x86|x64|ARM'
   solutionUWP: 'App.UWP\App.UWP.csproj'
   solutionWPF: 'AnotherApp.WPF\AnotherApp.WPF.csproj'
   buildConfiguration: 'Release'
@@ -31,17 +30,6 @@ steps:
   inputs:
     restoreSolution: '$(solutionUWP)'
 
-- task: NuGetCommand@2
-  displayName: NuGet restore for WPF
-  inputs:
-    restoreSolution: '$(solutionWPF)'
-
-- task: VSBuild@1
-  displayName: Build for WPF
-  inputs:
-    solution: '$(solutionWPF)'
-    configuration: $(BuildConfiguration)
-
 - task: VSBuild@1
   displayName: Build for UWP
   inputs:
@@ -50,21 +38,6 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=SideloadOnly'
 
-- task: CopyFiles@2
-  displayName: 'Copy WPF build files'
-  inputs:
-    SourceFolder: '$(system.defaultworkingdirectory)\AnotherApp.WPF\bin\$(BuildConfiguration)\'
-    Contents: '*'
-    TargetFolder: '$(appOutputDir)'
-
-- task: ArchiveFiles@1
-  displayName: Zip WPF release
-  inputs:
-    archiveType: zip
-    rootFolder: '$(appOutputDir)'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\WPF\App.WPF.$(Build.BuildNumber).zip'
-    includeRootFolder: false
-
 - task: ArchiveFiles@1
   displayName: Zip UWP release
   inputs:
@@ -72,12 +45,6 @@ steps:
     rootFolder: '$(appxPackageDir)'
     archiveFile: '$(Build.ArtifactStagingDirectory)\UWP\App.UWP.$(Build.BuildNumber).zip'
     includeRootFolder: false
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: WPF'
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\WPF'
-    artifactName: WPF
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: UWP'
