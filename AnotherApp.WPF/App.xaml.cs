@@ -13,5 +13,6 @@ namespace AnotherApp.WPF
     /// </summary>
     public partial class App : Application
     {
+        // Useless change
     }
 }
