@@ -15,7 +15,8 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  buildPlatform: 'x86|x64|ARM'
+  buildPlatform: 'x64'
+  #buildPlatform: 'x86|x64|ARM'
   solutionUWP: 'App.UWP\App.UWP.csproj'
   solutionWPF: 'AnotherApp.WPF\AnotherApp.WPF.csproj'
   buildConfiguration: 'Release'
